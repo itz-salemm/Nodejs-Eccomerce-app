@@ -13,10 +13,13 @@ connectDB()
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "ejs")
 
+// Middleware
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req,res) => {
-	res.send("A Microservice Ecommerce app")
-})
+// Routes
+const indexRoutes = require('./routes/indexRoutes')
+app.use('/', indexRoutes)
 
 
 const port = process.env.PORT || 5000
