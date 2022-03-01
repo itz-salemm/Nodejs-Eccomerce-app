@@ -1,8 +1,39 @@
-const ecommerce_index = (req, res) => {
-	res.render('index')
+const homePage = (req, res) => {
+	try {
+		res.render('index')
+	} catch (error) {
+		console.log(error)
+		res.render('index')
+	}
+}
+
+const productsPage = (req, res) => {
+	res.render('products')
+}
+
+/* const singleProductPage = (req, res) => {
+	res.render('singleProductPage')
+} */
+
+const aboutPage = (req, res) => {
+	res.render('about')
+}
+
+const contactPage = (req, res) => {
+	res.render('contact')
+}
+
+const cartPage = (req, res) => {
+	res.render('cart')
 }
 
 
 module.exports = {
-  ecommerce_index,
+  homePage,
+  productsPage,
+  aboutPage,
+  contactPage,
+  cartPage,
+  // singleProductPage
+
 }
