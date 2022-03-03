@@ -10,5 +10,10 @@ router.get('/about', blogController.aboutPage)
 router.get('/contact', blogController.contactPage)
 router.get('/cart', blogController.cartPage)
 // router.post('/add-to-cart/:id', blogController.homePage)
+router.get('/signin', blogController.signinPage)
+router.post('/signin', blogController.getsigninPage)
+router.get('/signup', blogController.signupPage)
+router.post('/signup', blogController.getsignupPage)
+
 
 module.exports = router;
