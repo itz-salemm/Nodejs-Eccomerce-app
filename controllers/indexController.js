@@ -5,19 +5,31 @@ const Joi = require('joi');
 const { signupValidation, signinValidation } = require('./validate')
 const bcrypt = require('bcryptjs')
 
-const homePage = (req, res) => {
-		res.render('index')
+const homePage = async (req, res) => { 
+  try {
+    const products = await Product.find({})
+    res.render('index', {products})
+  } catch(err) {
+    console.log(error);
+    res.redirect("/");
+  }
 
 }
 
-const productsPage = (req, res) => {
-	res.render('products')
+const productsPage = async (req, res) => {
+  try {
+    const products = await Product.find({})
+    res.render('products', {products})
+  } catch(err) {
+    console.log(error);
+    res.redirect("/");
+  }
 }
 
 
-/* const singleProductPage = (req, res) => {
+const singleProductPage = (req, res) => {
 	res.render('singleProductPage')
-} */
+}
 
 const aboutPage = (req, res) => {
 	res.render('about')
@@ -44,6 +56,7 @@ const getsigninPage = async (req, res) => {
      // Check if email exist
     const user = await User.findOne({email: email})
     if(!user) return res.status(400).send("Email does not exist")
+
     //check password
     const validpass = await bcrypt.compare(password, user.password)
     if(!validpass) return res.status(400).send("Wrong password")
@@ -99,12 +112,13 @@ const adminPage = (req, res) => {
 }
 
 const getadminPage = async (req, res) => {
-  const { name, price, description, quantity } = req.body
+  const { name, price, description, quantity, image } = req.body
   const product = new Product({
         name: name,
         price: price,
         description: description,
-        quantity: quantity
+        quantity: quantity,
+        imagePath: image
     })
 
     try {
@@ -123,7 +137,7 @@ module.exports = {
   aboutPage,
   contactPage,
   cartPage,
-  // singleProductPage
+  singleProductPage,
   signinPage,
   signupPage,
   getsignupPage,

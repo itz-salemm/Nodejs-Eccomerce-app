@@ -6,6 +6,7 @@ const blogController = require('../controllers/indexController');
 
 router.get('/', verifyAuth, blogController.homePage)
 router.get('/products', blogController.productsPage)
+router.get('/single', blogController.singleProductPage)
 // router.post('/product/:id', blogController.singleProductsPage)
 router.get('/about', blogController.aboutPage)
 router.get('/contact', blogController.contactPage)
@@ -15,8 +16,8 @@ router.get('/signin', blogController.signinPage)
 router.post('/signin', blogController.getsigninPage)
 router.get('/signup', blogController.signupPage)
 router.post('/signup', blogController.getsignupPage)
-router.get('/admin', blogController.adminPage)
-router.post('/admin', blogController.getadminPage)
+router.get('/admin',  verifyAuth, blogController.adminPage)
+router.post('/admin',  verifyAuth, blogController.getadminPage)
 
 
 module.exports = router;
