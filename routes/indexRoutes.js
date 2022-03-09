@@ -6,8 +6,7 @@ const blogController = require('../controllers/indexController');
 
 router.get('/', verifyAuth, blogController.homePage)
 router.get('/products', blogController.productsPage)
-router.get('/single', blogController.singleProductPage)
-// router.post('/product/:id', blogController.singleProductsPage)
+router.get('/products/:id', blogController.singleProductPage)
 router.get('/about', blogController.aboutPage)
 router.get('/contact', blogController.contactPage)
 router.get('/cart', blogController.cartPage)

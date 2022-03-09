@@ -27,8 +27,15 @@ const productsPage = async (req, res) => {
 }
 
 
-const singleProductPage = (req, res) => {
-	res.render('singleProductPage')
+const singleProductPage = async (req, res) => {
+  const productId = req.params.id;
+   try {
+    const product = await Product.findOne({_id: productId})
+    res.render('singleProductPage', {product})
+  } catch(err) {
+    console.log(error);
+    res.redirect("/");
+  }
 }
 
 const aboutPage = (req, res) => {
@@ -64,7 +71,8 @@ const getsigninPage = async (req, res) => {
     try {
       const token = jwt.sign({_id: user._id}, process.env.SECRET_TOKEN)
       res.cookie('access_token', token, { httpOnly: true, maxAge: 1000000 });
-      res.status(200).json({ user: user._id, token })
+      // res.status(200).json({ user: user._id, token })
+      res.render('index')
     } catch(err) {
       console.log(err)
       return res.status(400).render('signin')
